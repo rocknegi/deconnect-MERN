@@ -1,13 +1,13 @@
 const express = require("express");
 const router = express.Router();
 const auth = require("../../middleware/auth");
-const { check, validationResult } = require("express-validator/check");
+const { check, validationResult } = require("express-validator");
 
 const Profile = require("../../models/Profile");
 const User = require("../../models/User");
 
 // @router  GET api/profile/me
-// @desc    Get current users profile
+// @desc    Get current user's profile
 // @access  Private
 
 router.get("/me", auth, async (req, res) => {
