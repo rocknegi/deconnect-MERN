@@ -6,10 +6,11 @@ import { Provider } from "react-redux";
 import store from "./store";
 
 import "./App.css";
-import { Login } from "./components/layout/auth/Login";
-import { Register } from "./components/layout/auth/Register";
-import { Landing } from "./components/layout/Landing";
-import { Navbar } from "./components/layout/Navbar";
+import { Login } from "./components/auth/Login";
+import Register from "./components/auth/Register";
+import { Landing } from "./components/Landing";
+import { Navbar } from "./components/Navbar";
+import Alert from "./components/layout/Alert";
 
 const App = () => (
   <Provider store={store}>
@@ -17,6 +18,7 @@ const App = () => (
       <Navbar />
       <Route exact path="/" component={Landing} />
       <section className="contianer">
+        <Alert />
         <Switch>
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={Login} />
