@@ -1,4 +1,9 @@
-import { REGISTER_SUCCESS, REGISTER_FAIL } from "../actions/types";
+import {
+  REGISTER_SUCCESS,
+  REGISTER_FAIL,
+  USER_LOADED,
+  AUTH_ERROR,
+} from "../actions/types";
 
 const initState = {
   token: localStorage.getItem("token"),
@@ -11,8 +16,16 @@ export default function (state = initState, action) {
   const { type, payload } = action;
 
   switch (type) {
+    case USER_LOADED:
+      return {
+        ...state,
+        isAuth: true,
+        loading: false,
+        user: payload,
+      };
+
     case REGISTER_SUCCESS:
-      localStorage.setIem("token", payload.token);
+      localStorage.setItem("token", payload.token);
       return (state = {
         ...state,
         ...payload,
@@ -28,6 +41,16 @@ export default function (state = initState, action) {
         loading: false,
         isAuth: false,
       });
+
+    case AUTH_ERROR:
+      localStorage.removeItem("token");
+      return (state = {
+        ...state,
+        token: null,
+        loading: false,
+        isAuth: false,
+      });
+
     default:
       return state;
   }
