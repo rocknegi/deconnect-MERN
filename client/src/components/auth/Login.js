@@ -1,7 +1,10 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
+import { connect } from "react-redux";
+import { login } from "../../redux/actions/auth";
+import PropTypes from "prop-types";
 
-export const Login = () => {
+const Login = ({ login, isAuth }) => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -14,8 +17,11 @@ export const Login = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    console.log("success");
+    login(email, password);
   };
+
+  //Redirect if logged in
+  if (isAuth) return <Redirect to="/dashboard" />;
 
   return (
     <section className="container">
@@ -52,3 +58,14 @@ export const Login = () => {
     </section>
   );
 };
+
+Login.prototype = {
+  login: PropTypes.func.isRequired,
+  isAuth: PropTypes.bool.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  isAuth: state.auth.isAuth,
+});
+
+export default connect(mapStateToProps, { login })(Login);

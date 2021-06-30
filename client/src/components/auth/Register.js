@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
 import { setAlert } from "../../redux/actions/alert";
 import { register } from "../../redux/actions/auth";
 
-const Register = ({ setAlert, register }) => {
+const Register = ({ setAlert, register, isAuth }) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -45,6 +45,8 @@ const Register = ({ setAlert, register }) => {
     }
   };
 
+  if (isAuth) return <Redirect to="/dashboard" />;
+
   return (
     <section className="container">
       <h1 className="large text-primary">Sign Up</h1>
@@ -57,7 +59,7 @@ const Register = ({ setAlert, register }) => {
             type="text"
             placeholder="Name"
             name="name"
-            // required
+            required
             value={name}
             onChange={(e) => onChange(e)}
           />
@@ -68,7 +70,7 @@ const Register = ({ setAlert, register }) => {
             placeholder="Email Address"
             name="email"
             value={email}
-            // required
+            required
             onChange={(e) => onChange(e)}
           />
           <small className="form-text">
@@ -108,6 +110,11 @@ const Register = ({ setAlert, register }) => {
 Register.propTypes = {
   setAlert: PropTypes.func.isRequired,
   register: PropTypes.func.isRequired,
+  isAuth: PropTypes.bool.isRequired,
 };
 
-export default connect(null, { setAlert, register })(Register);
+const mapStateToProps = (state) => ({
+  isAuth: state.auth.isAuth,
+});
+
+export default connect(mapStateToProps, { setAlert, register })(Register);
