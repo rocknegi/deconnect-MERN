@@ -2,7 +2,7 @@
 :root {
   --primary-color: #17a2b8;
   --dark-color: #343a40;
-  --light-color: #f4f4f4;
+  --light-color: #e4e4e4;
   --danger-color: #dc3545;
   --success-color: #28a745;
 }
@@ -304,7 +304,7 @@ button {
   justify-content: space-between;
   align-items: center;
   padding: 0.7rem 2rem;
-  /* position: fixed; */
+  position: fixed;
   z-index: 1;
   width: 100%;
   top: 0;
