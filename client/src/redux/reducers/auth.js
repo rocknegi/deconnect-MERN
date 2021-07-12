@@ -16,7 +16,7 @@ const initState = {
   user: null,
 };
 
-export default function (state = initState, action) {
+export default function foo(state = initState, action) {
   const { type, payload } = action;
 
   switch (type) {
