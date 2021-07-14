@@ -9,7 +9,7 @@ export const getPosts = () => async (dispatch) => {
     const res = await axios.get("/api/posts");
     dispatch({
       type: GET_POSTS,
-      paylaod: res.data,
+      payload: res.data,
     });
   } catch (err) {
     dispatch({

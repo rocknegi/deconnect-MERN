@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getPosts } from "../../../redux/actions/post";
 
-const Posts = ({ getPosts }) => {
+const Posts = ({ getPosts, post: { posts, loading } }) => {
   useEffect(() => {
     getPosts();
   }, [getPosts]);
